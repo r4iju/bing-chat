@@ -321,6 +321,9 @@ export class BingChat {
       if (res.ok) {
         return res.json()
       } else {
+        console.error(
+          `${res.status} / ${res.statusText} error with agent: ${this._agent} `
+        )
         throw new Error(
           `unexpected HTTP error createConversation ${res.status}: ${res.statusText}`
         )
