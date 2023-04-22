@@ -291,16 +291,16 @@ export class BingChat {
         'accept-language': 'en-US,en;q=0.9',
         'content-type': 'application/json',
         'sec-ch-ua':
-          '"Not_A Brand";v="99", "Microsoft Edge";v="109", "Chromium";v="109"',
+          '"Not_A Brand";v="99", "Microsoft Edge";v="111", "Chromium";v="111"',
         'sec-ch-ua-arch': '"x86"',
         'sec-ch-ua-bitness': '"64"',
-        'sec-ch-ua-full-version': '"109.0.1518.78"',
+        'sec-ch-ua-full-version': '"111.0.0.0"',
         'sec-ch-ua-full-version-list':
-          '"Not_A Brand";v="99.0.0.0", "Microsoft Edge";v="109.0.1518.78", "Chromium";v="109.0.5414.120"',
+          '"Not_A Brand";v="111.0.0.0", "Microsoft Edge";v="111.0.0.0", "Chromium";v="111.0.0.0"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-model': '',
         'sec-ch-ua-platform': '"macOS"',
-        'sec-ch-ua-platform-version': '"12.6.0"',
+        'sec-ch-ua-platform-version': '"14.6.0"',
         'sec-fetch-dest': 'empty',
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'same-origin',
@@ -308,7 +308,7 @@ export class BingChat {
         'x-ms-client-request-id': requestId,
         'x-ms-useragent':
           'azsdk-js-api-client-factory/1.0.0-beta.1 core-rest-pipeline/1.10.0 OS/MacIntel',
-        cookie
+        cookie: cookie
       },
       referrer: 'https://www.bing.com/search',
       referrerPolicy: 'origin-when-cross-origin',
@@ -316,7 +316,7 @@ export class BingChat {
       agent: this._agent,
       method: 'GET'
       // mode: 'cors',
-      // credentials: 'include'
+      // credentials: 'include',
     }).then((res) => {
       if (res.ok) {
         return res.json()
