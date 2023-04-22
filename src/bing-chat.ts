@@ -1,26 +1,32 @@
 import crypto from 'node:crypto'
 
+import fetch from 'node-fetch'
+import { SocksProxyAgent } from 'socks-proxy-agent'
 import WebSocket from 'ws'
 
 import * as types from './types'
-import { fetch } from './fetch'
 
 const terminalChar = ''
 
 export class BingChat {
   protected _cookie: string
   protected _debug: boolean
+  protected _agent: SocksProxyAgent
 
   constructor(opts: {
     cookie: string
 
     /** @defaultValue `false` **/
     debug?: boolean
+
+    /** @defaultValue `undefined` **/
+    agent?: SocksProxyAgent
   }) {
-    const { cookie, debug = false } = opts
+    const { cookie, agent = undefined, debug = false } = opts
 
     this._cookie = cookie
     this._debug = !!debug
+    this._agent = agent ?? undefined
 
     if (!this._cookie) {
       throw new Error('Bing cookie is required')
@@ -307,9 +313,10 @@ export class BingChat {
       referrer: 'https://www.bing.com/search',
       referrerPolicy: 'origin-when-cross-origin',
       body: null,
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include'
+      agent: this._agent,
+      method: 'GET'
+      // mode: 'cors',
+      // credentials: 'include'
     }).then((res) => {
       if (res.ok) {
         return res.json()
@@ -318,6 +325,6 @@ export class BingChat {
           `unexpected HTTP error createConversation ${res.status}: ${res.statusText}`
         )
       }
-    })
+    }) as unknown as types.ConversationResult
   }
 }
