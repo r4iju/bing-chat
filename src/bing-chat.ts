@@ -216,15 +216,11 @@ export class BingChat {
           }
 
           for (const message of messages) {
-            // console.log(JSON.stringify(message, null, 2))
-
             if (message.type === 1) {
               const update = message as types.ChatUpdate
               const msg = update.arguments[0].messages?.[0]
 
               if (!msg) continue
-
-              // console.log('RESPONSE0', JSON.stringify(update, null, 2))
 
               if (!msg.messageType) {
                 result.author = msg.author
