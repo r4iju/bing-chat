@@ -210,7 +210,7 @@ var BingChat = class {
   }
   async createConversation() {
     const requestId = crypto.randomUUID();
-    const cookie = this._cookie.includes(";") ? this._cookie : `_U=${this._cookie}`;
+    const cookie = (this._cookie.includes(";") ? this._cookie : `_U=${this._cookie}`) + `;SRCHHPGUSR=HV=${Math.round((/* @__PURE__ */ new Date()).getTime() / 1e3)}`;
     return fetch("https://www.bing.com/turing/conversation/create", {
       headers: {
         accept: "application/json",
@@ -232,7 +232,7 @@ var BingChat = class {
         "x-edge-shopping-flag": "1",
         "x-ms-client-request-id": requestId,
         "x-ms-useragent": "azsdk-js-api-client-factory/1.0.0-beta.1 core-rest-pipeline/1.10.0 OS/MacIntel",
-        "cookie": cookie
+        cookie
       },
       referrer: "https://www.bing.com/search",
       referrerPolicy: "origin-when-cross-origin",
