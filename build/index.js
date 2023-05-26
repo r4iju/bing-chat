@@ -214,6 +214,7 @@ var BingChat = class {
     return fetch("https://www.bing.com/turing/conversation/create", {
       headers: {
         accept: "application/json",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/604.1 Edg/111.0.100.0",
         "accept-language": "en-US,en;q=0.9",
         "content-type": "application/json",
         "sec-ch-ua": '"Not_A Brand";v="99", "Microsoft Edge";v="111", "Chromium";v="111"',
@@ -231,15 +232,13 @@ var BingChat = class {
         "x-edge-shopping-flag": "1",
         "x-ms-client-request-id": requestId,
         "x-ms-useragent": "azsdk-js-api-client-factory/1.0.0-beta.1 core-rest-pipeline/1.10.0 OS/MacIntel",
-        cookie
+        "cookie": cookie
       },
       referrer: "https://www.bing.com/search",
       referrerPolicy: "origin-when-cross-origin",
       body: null,
       agent: this._agent,
       method: "GET"
-      // mode: 'cors',
-      // credentials: 'include',
     }).then((res) => {
       if (res.ok) {
         return res.json();

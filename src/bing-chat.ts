@@ -277,13 +277,15 @@ export class BingChat {
   async createConversation(): Promise<types.ConversationResult> {
     const requestId = crypto.randomUUID()
 
-    const cookie = this._cookie.includes(';')
-      ? this._cookie
-      : `_U=${this._cookie}`
+    const cookie =
+      (this._cookie.includes(';') ? this._cookie : `_U=${this._cookie}`) +
+      `;SRCHHPGUSR=HV=${Math.round(new Date().getTime() / 1e3)}`
 
     return fetch('https://www.bing.com/turing/conversation/create', {
       headers: {
         accept: 'application/json',
+        'user-agent':
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/604.1 Edg/111.0.100.0',
         'accept-language': 'en-US,en;q=0.9',
         'content-type': 'application/json',
         'sec-ch-ua':
@@ -311,8 +313,6 @@ export class BingChat {
       body: null,
       agent: this._agent,
       method: 'GET'
-      // mode: 'cors',
-      // credentials: 'include',
     }).then((res) => {
       if (res.ok) {
         return res.json()
